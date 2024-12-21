@@ -1,2 +1,52 @@
 # nextjs-langchain-bot
-A Retrieval-Augmented Generation (RAG) chatbot built using JavaScript, LangChain.js, Next.js, and OpenAI. This project demonstrates how to create an intelligent, context-aware conversational AI capable of retrieving relevant data to provide accurate and insightful responses. Deployed seamlessly with Vercel for scalability and performance.
+
+## Description
+`nextjs-langchain-bot` is a Retrieval-Augmented Generation (RAG) chatbot built using **JavaScript**, **LangChain.js**, **Next.js**, and **OpenAI**. It retrieves relevant data from a knowledge base and combines it with OpenAI's natural language processing to deliver intelligent, context-aware responses. The chatbot is deployed seamlessly on **Vercel** for optimal performance.
+
+---
+
+## Table of Contents
+1. [Features](#features)  
+2. [Tech Stack](#tech-stack)  
+3. [Getting Started](#getting-started)  
+    - [Prerequisites](#prerequisites)  
+    - [Installation](#installation)  
+4. [Usage](#usage)  
+5. [Folder Structure](#folder-structure)  
+6. [Roadmap](#roadmap)  
+7. [Contributing](#contributing)  
+8. [License](#license)  
+9. [Acknowledgments](#acknowledgments)
+
+---
+
+## Features
+- **Contextual Chatbot**: Provides precise and meaningful responses by retrieving relevant information.  
+- **Retrieval-Augmented Generation**: Integrates external data retrieval with advanced language models.  
+- **Custom Knowledge Base**: Supports domain-specific datasets for enhanced query handling.  
+- **Scalable Deployment**: Deployed on **Vercel** for high availability and low-latency interactions.  
+
+---
+
+## Tech Stack
+- **Frontend**: Next.js  
+- **Backend**: LangChain.js  
+- **AI Model**: OpenAI API  
+- **Deployment**: Vercel  
+
+---
+
+## Getting Started
+
+### Prerequisites
+Before starting, ensure you have the following installed:
+- Node.js (>=14.x)
+- NPM or Yarn
+- OpenAI API Key
+- Vercel Account
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/nextjs-langchain-bot.git
+   cd nextjs-langchain-bot
