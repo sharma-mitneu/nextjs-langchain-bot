@@ -48,5 +48,14 @@ Before starting, ensure you have the following installed:
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/nextjs-langchain-bot.git
+   git clone https://github.com/sharma-mitneu/nextjs-langchain-bot.git
    cd nextjs-langchain-bot
+2. Install Dependencies:
+   ```bash
+   npm install
+3. Create a .env file in the root directory with the following contents:
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key
+4. Start the development server:
+   ```bash
+   npm run dev
