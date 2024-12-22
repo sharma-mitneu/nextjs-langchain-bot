@@ -1,29 +1,33 @@
-import { text } from "stream/consumers"
-import PromptSuggestionButton from "./PromptSuggestionButton"
+import React from "react";
+import PromptSuggestionButton from "./PromptSuggestionButton";
 
-const PromptSuggestionRow = ({ onPromptClick }) => {
-
-    const prompts = [
-        "Who is the best player in premier league history ?",
-        "Who is the highest goal scorer ?",
-        "Who is the current leader in premier league ?",
-        "Who is the amad diallo ?"
-    ]
-    return (
-
-        <div className="prompt-suggestion-row">
-            {prompts.map((prompt, index) => (
-            <PromptSuggestionButton 
-            key={prompt || `suggestion-${index}`} 
-            text={prompt} 
-             onClick={() => onPromptClick(prompt)} 
-    />
-  ))}
-</div>
-
-        
-    )
-
+interface PromptSuggestionRowProps {
+    onPromptClick: (prompt: string) => void;
 }
 
-export default PromptSuggestionRow
+const PromptSuggestionRow: React.FC<PromptSuggestionRowProps> = ({ onPromptClick }) => {
+    const prompts = [
+        "Who is the best player in Premier League history?",
+        "Who is the highest goal scorer?",
+        "Who is the current leader in the Premier League?",
+        "Who is Amad Diallo?",
+    ];
+
+    return (
+        <div className="prompt-suggestion-row">
+            {prompts.length === 0 ? (
+                <p>No suggestions available.</p>
+            ) : (
+                prompts.map((prompt) => (
+                    <PromptSuggestionButton
+                        key={prompt}
+                        text={prompt}
+                        onClick={() => onPromptClick(prompt)}
+                    />
+                ))
+            )}
+        </div>
+    );
+};
+
+export default PromptSuggestionRow;
