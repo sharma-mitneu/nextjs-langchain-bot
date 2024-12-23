@@ -26,14 +26,21 @@ const Home = () => {
                     messages: [{ role: "user", content: promptText }],
                 }),
             });
-
+    
             if (!response.ok) {
                 throw new Error("Failed to fetch API response.");
             }
-
+    
             const data = await response.json();
-            console.log("New Data in UI " + data.choices)
-            setApiResponse(data.choices); // Assuming "choices" contains the response text
+            console.log("New Data in UI:", data.choices);
+    
+            // Append the bot's response as a new message
+            const botMessage: Message = {
+                id: crypto.randomUUID(),
+                content: data.choices,  // Display the response from API
+                role: "assistant",  // Assuming "assistant" role for the bot's response
+            };
+            append(botMessage);  // Update the messages state
         } catch (err) {
             console.error(err.message);
             setApiResponse("Failed to fetch response. Please try again.");
@@ -46,10 +53,10 @@ const Home = () => {
             content: promptText,
             role: "user",
         };
-        append(msg);
-
+        append(msg);  // Update the messages state
+    
         // Fetch API response after user input
-        await fetchApiResponse(promptText);
+        await fetchApiResponse(promptText);  // Update apiResponse state
     };
 
     return (
@@ -74,14 +81,14 @@ const Home = () => {
                         {isLoading && <LoadingBubble />}
                     </>
                 )}
-            </section>
 
-            {apiResponse && (
+                {apiResponse && (
                 <section className="api-response">
                     <h2>Response:</h2>
                     <p>{apiResponse}</p>
-                </section>
-            )}
+                    </section>
+                )}
+            </section>
 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="question-box" className="sr-only">
