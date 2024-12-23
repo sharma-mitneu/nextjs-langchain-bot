@@ -67,7 +67,7 @@ export async function POST(req) {
             // Generate embedding from OpenAI
             console.log("Generating embedding...");
             const embedding = await openai.embeddings.create({
-                model: "text-embedding-ada-002",
+                model: "text-embedding-3-small",
                 input: latestMessage,
             });
             console.log("Embedding generated successfully.");
@@ -99,10 +99,21 @@ export async function POST(req) {
 
         const template = {
             role: "system",
-            content: `You are an AI assistant who knows everything about the Premier League.\n\n` +
-                `Format responses using markdown where applicable and don't return images.\n\n` +
-                `QUESTION: ${latestMessage}\n-------------`,
-        };
+            content: `You are an AI assistant who knows everything about the Premier League.
+            Use the below context to argument what you know about Premier League Football. The context
+            will provide you with the most recent data from wikipedia, the official EPL website and others.
+            If the context doesn't include the information you need answer based on your existing knowledge and 
+            don't mention tge source of information or what the context does or doesn't include.
+            Format responses using markdown where applicable and don't reutnr images.
+            -------------
+            START CONTEXT
+            ${docContext}
+            END CONTEXT
+            -------------
+            QUESTION: ${latestMessage}
+            -------------
+            `
+        }
 
         // Generate chat completion
         console.log("Generating chat response...");
@@ -111,14 +122,20 @@ export async function POST(req) {
             stream: false, // Temporarily set to false for debugging
             messages: [template, ...messages],
         });
-        console.log("Chat response generated successfully.");
+        console.log("Chat response generated successfully." + response.choices[0].message.content);
 
-        return new Response(JSON.stringify(response), {
-            headers: {
-                "Content-Type": "application/json",
-                ...corsHeaders,
-            },
-        });
+        //return response.choices[0].message.content
+        return new Response(
+            JSON.stringify({
+                choices: response.choices[0].message.content, // Return as-is to the frontend
+            }),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            }
+        );
     } catch (error) {
         console.error("Error processing request:", error);
         return new Response(

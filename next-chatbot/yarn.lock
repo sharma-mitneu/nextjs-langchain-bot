@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@ai-sdk/openai@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.npmjs.org/@ai-sdk/openai/-/openai-1.0.11.tgz"
+  integrity sha512-qI9s7Slma5i5bB4yYVlFdcG3PNDwdqivPT1Dr8adDX92nSSpILjgFIooS5yys9sXjvvcfOi/WXbDvVhLSRRlvg==
+  dependencies:
+    "@ai-sdk/provider" "1.0.3"
+    "@ai-sdk/provider-utils" "2.0.5"
+
 "@ai-sdk/provider-utils@2.0.5":
   version "2.0.5"
   resolved "https://registry.npmjs.org/@ai-sdk/provider-utils/-/provider-utils-2.0.5.tgz"

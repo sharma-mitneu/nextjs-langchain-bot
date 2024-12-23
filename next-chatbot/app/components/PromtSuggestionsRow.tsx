@@ -18,9 +18,9 @@ const PromptSuggestionRow: React.FC<PromptSuggestionRowProps> = ({ onPromptClick
             {prompts.length === 0 ? (
                 <p>No suggestions available.</p>
             ) : (
-                prompts.map((prompt) => (
+                prompts.map((prompt, index) => (
                     <PromptSuggestionButton
-                        key={prompt}
+                        key={`suggestion-${index}`}
                         text={prompt}
                         onClick={() => onPromptClick(prompt)}
                     />
