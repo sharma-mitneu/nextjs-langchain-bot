@@ -40,6 +40,11 @@ section.populated {
     flex-direction: column;
     justify-content: flex-end;
     overflow-y: auto;
+    max-height: 500px; /* Ensure the section is scrollable */
+    background-color: #ffffff; /* Slight background color for distinction */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 section.populated::-webkit-scrollbar {
@@ -73,6 +78,7 @@ form {
     border-radius: 0 0 10px 10px;
     overflow: hidden;
     transition: border-color 0.3s ease-in-out;
+    background-color: #f1f1f1; /* Background color for input section */
 }
 
 form:hover {
@@ -133,6 +139,7 @@ input[type="submit"]:hover {
 
 .prompt-suggestion-row {
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .api-response {
@@ -142,10 +149,10 @@ input[type="submit"]:hover {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .api-response h2 {
     margin-bottom: 10px;
 }
-
 
 .prompt-suggestion-button {
     margin: 8px;

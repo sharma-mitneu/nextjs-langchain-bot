@@ -29,17 +29,17 @@ const openai = new OpenAI({
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
 const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
 
-const corsHeaders = {
-    "Access-Control-Allow-Origin": "*", // Replace '*' with your domain for production
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-};
+// const corsHeaders = {
+//     "Access-Control-Allow-Origin": "*", // Replace '*' with your domain for production
+//     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+//     "Access-Control-Allow-Headers": "Content-Type",
+// };
 
-// OPTIONS handler
-export async function OPTIONS() {
-    console.log("OPTIONS request received.");
-    return new Response(null, { headers: corsHeaders });
-}
+// // OPTIONS handler
+// export async function OPTIONS() {
+//     console.log("OPTIONS request received.");
+//     return new Response(null, { headers: corsHeaders });
+// }
 
 // POST handler
 export async function POST(req) {
@@ -107,7 +107,7 @@ export async function POST(req) {
             Format responses using markdown where applicable and don't reutnr images.
             -------------
             START CONTEXT
-            ${docContext}
+            ${truncatedDocContext}
             END CONTEXT
             -------------
             QUESTION: ${latestMessage}
@@ -131,8 +131,7 @@ export async function POST(req) {
             }),
             {
                 headers: {
-                    "Content-Type": "application/json",
-                    ...corsHeaders,
+                    "Content-Type": "application/json"
                 },
             }
         );
@@ -140,7 +139,7 @@ export async function POST(req) {
         console.error("Error processing request:", error);
         return new Response(
             JSON.stringify({ error: error.message || "Internal Server Error" }),
-            { status: 500, headers: corsHeaders }
+            { status: 500, headers: {"Content-Type": "application/json"} }
         );
     }
 }

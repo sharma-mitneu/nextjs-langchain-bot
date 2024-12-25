@@ -7,7 +7,7 @@ import { Message } from "ai";
 import clsx from "clsx";
 import Bubble from "./components/bubble";
 import LoadingBubble from "./components/LoadingBubble";
-import PromtSuggestionsRow from "./components/PromtSuggestionsRow";
+import PromptSuggestionsRow from "./components/PromtSuggestionsRow";
 import { useState } from "react";
 
 const Home = () => {
@@ -26,21 +26,21 @@ const Home = () => {
                     messages: [{ role: "user", content: promptText }],
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error("Failed to fetch API response.");
             }
-    
+
             const data = await response.json();
             console.log("New Data in UI:", data.choices);
-    
+
             // Append the bot's response as a new message
             const botMessage: Message = {
                 id: crypto.randomUUID(),
-                content: data.choices,  // Display the response from API
-                role: "assistant",  // Assuming "assistant" role for the bot's response
+                content: data.choices || "No response received.", // Fallback for empty responses
+                role: "assistant",
             };
-            append(botMessage);  // Update the messages state
+            append(botMessage); // Update the messages state
         } catch (err) {
             console.error(err.message);
             setApiResponse("Failed to fetch response. Please try again.");
@@ -48,30 +48,35 @@ const Home = () => {
     };
 
     const handlePrompt = async (promptText: string) => {
-        const msg: Message = {
+        // Append the user's message
+        const userMessage: Message = {
             id: crypto.randomUUID(),
             content: promptText,
             role: "user",
         };
-        append(msg);  // Update the messages state
-    
-        // Fetch API response after user input
-        await fetchApiResponse(promptText);  // Update apiResponse state
+        append(userMessage);
+
+        // Clear the input field immediately after appending the user's message
+        handleInputChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
+
+        // Fetch API response
+        await fetchApiResponse(promptText);
     };
 
     return (
-        <main>
+        <main className="app">
+            {/* Premier League Logo */}
             <Image src={premierLeagueLogo} width="250" alt="Premier League GPT" />
 
-            <section className={clsx({ populated: !noMessages })}>
+            {/* Message Section */}
+            <section className={clsx("chat-section", { populated: !noMessages })}>
                 {noMessages ? (
                     <>
                         <p className="starter-text">
-                            Welcome to PremierLeagueGPT! Ask me anything about the Premier League and it will come back
+                            Welcome to PremierLeagueGPT! Ask me anything about the Premier League, and it will come back
                             with the most up-to-date answers! Hope you enjoy it!
                         </p>
-                        <br />
-                        <PromtSuggestionsRow onPromptClick={handlePrompt} />
+                        <PromptSuggestionsRow onPromptClick={handlePrompt} />
                     </>
                 ) : (
                     <>
@@ -82,15 +87,25 @@ const Home = () => {
                     </>
                 )}
 
+                {/* Display API Error if present */}
                 {apiResponse && (
-                <section className="api-response">
-                    <h2>Response:</h2>
-                    <p>{apiResponse}</p>
+                    <section className="api-response">
+                        <h2>Response:</h2>
+                        <p>{apiResponse}</p>
                     </section>
                 )}
             </section>
 
-            <form onSubmit={handleSubmit}>
+            {/* User Input Form */}
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    if (input.trim()) {
+                        handlePrompt(input);
+                    }
+                }}
+                className="user-input-form"
+            >
                 <label htmlFor="question-box" className="sr-only">
                     Ask a question
                 </label>
@@ -101,7 +116,9 @@ const Home = () => {
                     value={input}
                     placeholder="Ask me something..."
                 />
-                <input type="submit" />
+                <button type="submit" className="submit-button" disabled={isLoading}>
+                    {isLoading ? "Sending..." : "Send"}
+                </button>
             </form>
         </main>
     );
