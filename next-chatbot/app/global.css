@@ -1,6 +1,4 @@
-* {
-    font-family: Verdana, Tahoma, sans-serif;
-}
+/* General Chat Container Styles */
 
 body {
     margin: 0;
@@ -30,42 +28,53 @@ main {
     padding: 20px;
 }
 
-section {
+.chat-container {
     width: 100%;
-}
-
-section.populated {
-    height: 100%;
+    max-width: 1000px;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #ffffff; /* Slightly brighter background */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    overflow-y: auto;
-    max-height: 500px; /* Ensure the section is scrollable */
-    background-color: #ffffff; /* Slight background color for distinction */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for modern look */
 }
 
-section.populated::-webkit-scrollbar {
-    width: 8px;
-}
-
-section.populated::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-section.populated::-webkit-scrollbar-thumb {
-    background: #a0a0a0;
+/* Button Styles */
+.prompt-suggestion-button {
+    padding: 12px 25px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-section.populated::-webkit-scrollbar-thumb:hover {
-    background: #707070;
+.prompt-suggestion-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Subtle lift on hover */
 }
 
-.starter-text {
-    padding: 0 80px;
+.prompt-suggestion-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Row Styling */
+.prompt-suggestion-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 form {
@@ -115,114 +124,113 @@ input[type="submit"]:hover {
     background-color: #5324b2;
 }
 
-.bubble {
-    margin: 8px;
-    padding: 8px;
-    font-size: 15px;
-    box-shadow: #959da553 0 8px 24px;
-    width: 80%;
-    text-align: left;
-}
 
-.bubble.user {
-    border-radius: 20px 20px 0 20px;
-    background-color: #e1f4ff;
-    border: 1px solid #a0d7ff;
-    margin-left: auto;
-}
-
-.bubble.assistant {
-    border-radius: 20px 20px 20px 0;
-    background-color: #dce7ff;
-    border: 1px solid #b3c7ff;
-}
-
-.prompt-suggestion-row {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.api-response {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f9f9f9;
+/* Chat History Styles (Scrollable Area) */
+.chat-history {
+    max-height: 400px; /* Adjust based on your preference */
+    overflow-y: auto;
+    padding-right: 5px;
+    border: 1px solid #ddd; /* Subtle border for clarity */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
+    padding: 10px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.api-response h2 {
-    margin-bottom: 10px;
+.chat-history::-webkit-scrollbar {
+    width: 8px;
 }
 
-.prompt-suggestion-button {
-    margin: 8px;
-    padding: 8px;
-    font-size: 15px;
-    border: none;
-    border-color: #fff;
+.chat-history::-webkit-scrollbar-thumb {
+    background-color: #888;
     border-radius: 10px;
-    color: #383838;
-    box-shadow: #959da533 0 8px 24px;
-    transition: background-color 0.3s ease-in-out;
 }
 
-.prompt-suggestion-button:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
+.chat-history::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
-.loader {
-    margin: 10px;
-    width: 60px;
-    aspect-ratio: 4;
-    background: no-repeat radial-gradient(circle closest-side, #383838 90%, #0000 0 50%),
-                no-repeat radial-gradient(circle closest-side, #383838 90%, #0000 50% 50%),
-                no-repeat radial-gradient(circle closest-side, #383838 90%, #0000 100% 50%);
-    background-size: calc(100%/3) 100%;
-    animation: loading 1s infinite linear;
-    will-change: background;
+/* Individual Message Styles */
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
-@keyframes loading {
-    0%, 100% {
-        background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0;
-    }
-    33% {
-        background-size: calc(100% / 3) 0, calc(100% / 3) 100%, calc(100% / 3) 100%;
-    }
-    66% {
-        background-size: calc(100% / 3) 100%, calc(100% / 3) 0, calc(100% / 3) 100%;
-    }
+.user-message,
+.assistant-message {
+    max-width: 75%;
+    padding: 12px 18px;
+    border-radius: 15px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
+.user-message {
+    align-self: flex-end;
+    background-color: #d1e7ff;
+    color: #333;
+    border-top-right-radius: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.assistant-message {
+    align-self: flex-start;
+    background-color: #e1f0dc;
+    color: #333;
+    border-top-left-radius: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* User and Assistant Icon Styles */
+.user-icon,
+.assistant-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.user-icon {
+    background-color: #007bff;
+}
+
+.assistant-icon {
+    background-color: #28a745;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
-        height: auto;
+    .chat-container {
+        max-width: 90%;
+        padding: 15px;
     }
 
-    main {
-        width: 95vw;
-        height: auto;
-        padding: 10px;
+    .user-message,
+    .assistant-message {
+        max-width: 90%;
     }
 
-    .bubble {
-        width: 100%;
+    .user-icon,
+    .assistant-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
     }
 
-    form {
-        flex-direction: column;
-        height: auto;
-        padding-top: 10px;
-    }
-
-    input.question-box {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    input[type="submit"] {
-        width: 100%;
+    .prompt-suggestion-button {
+        padding: 10px 20px;
+        font-size: 12px;
     }
 }

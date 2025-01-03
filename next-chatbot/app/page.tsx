@@ -34,13 +34,12 @@ const Home = () => {
             const data = await response.json();
             console.log("New Data in UI:", data.choices);
 
-            // Append the bot's response as a new message
             const botMessage: Message = {
                 id: crypto.randomUUID(),
-                content: data.choices || "No response received.", // Fallback for empty responses
+                content: data.choices || "No response received.",
                 role: "assistant",
             };
-            append(botMessage); // Update the messages state
+            append(botMessage);
         } catch (err) {
             console.error(err.message);
             setApiResponse("Failed to fetch response. Please try again.");
@@ -48,28 +47,23 @@ const Home = () => {
     };
 
     const handlePrompt = async (promptText: string) => {
-        // Append the user's message
         const userMessage: Message = {
             id: crypto.randomUUID(),
             content: promptText,
             role: "user",
         };
         append(userMessage);
-
-        // Clear the input field immediately after appending the user's message
         handleInputChange({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
-
-        // Fetch API response
         await fetchApiResponse(promptText);
     };
 
     return (
-        <main className="app">
+        <main className="chat-container">
             {/* Premier League Logo */}
             <Image src={premierLeagueLogo} width="250" alt="Premier League GPT" />
 
             {/* Message Section */}
-            <section className={clsx("chat-section", { populated: !noMessages })}>
+            <section className={clsx("chat-history", { populated: !noMessages })}>
                 {noMessages ? (
                     <>
                         <p className="starter-text">
@@ -81,7 +75,24 @@ const Home = () => {
                 ) : (
                     <>
                         {messages.map((message, index) => (
-                            <Bubble key={`message-${index}`} message={message} />
+                            <div
+                                key={`message-${index}`}
+                                className={clsx("message", {
+                                    "user-message": message.role === "user",
+                                    "assistant-message": message.role === "assistant",
+                                })}
+                            >
+                                {/* Icon for User or Assistant */}
+                                <div
+                                    className={clsx({
+                                        "user-icon": message.role === "user",
+                                        "assistant-icon": message.role === "assistant",
+                                    })}
+                                >
+                                    {message.role === "user" ? "U" : "A"}
+                                </div>
+                                <Bubble message={message} />
+                            </div>
                         ))}
                         {isLoading && <LoadingBubble />}
                     </>
