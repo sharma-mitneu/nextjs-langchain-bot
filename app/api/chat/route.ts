@@ -2,24 +2,25 @@ import OpenAI from "openai";
 import { DataAPIClient } from "@datastax/astra-db-ts";
 
 // Extract environment variables
-const {
-    ASTRA_DB_NAMESPACE,
-    ASTRA_DB_COLLECTION,
-    ASTRA_DB_API_ENDPOINT,
-    ASTRA_DB_APPLICATION_TOKEN,
-    OPENAI_API_KEY,
-} = process.env;
+// const {
+//     ASTRA_DB_NAMESPACE,
+//     ASTRA_DB_COLLECTION,
+//     ASTRA_DB_API_ENDPOINT,
+//     ASTRA_DB_APPLICATION_TOKEN,
+//     OPENAI_API_KEY,
+// } = process.env;
 
-// Check for missing environment variables
-if (
-    !ASTRA_DB_NAMESPACE ||
-    !ASTRA_DB_COLLECTION ||
-    !ASTRA_DB_API_ENDPOINT ||
-    !ASTRA_DB_APPLICATION_TOKEN ||
-    !OPENAI_API_KEY
-) {
-    throw new Error("Missing one or more required environment variables.");
-}
+// // Check for missing environment variables
+// if (
+//     !ASTRA_DB_NAMESPACE ||
+//     !ASTRA_DB_COLLECTION ||
+//     !ASTRA_DB_API_ENDPOINT ||
+//     !ASTRA_DB_APPLICATION_TOKEN ||
+//     !OPENAI_API_KEY
+// ) {
+//     throw new Error("Missing one or more required environment variables.");
+//     console.log("Missing one or more required environment variables.")
+// }
 
 // Initialize OpenAI and Astra DB clients
 const openai = new OpenAI({
