@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("assests/zigzag-blue-magenta-background-epl-english-premier-league-thumbnail-video-print-web-background-free-vector.jpg");
+    background-image: url("../public/zigzag-blue-magenta-background-epl-english-premier-league-thumbnail-video-print-web-background-free-vector.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;

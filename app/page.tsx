@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import premierLeagueLogo from "./assests/premierLeagueLogo.jpeg";
+import premierLeagueLogo from "../public/premierLeagueLogo.jpeg";
 import { useChat } from "ai/react";
 import { Message } from "ai";
 import clsx from "clsx";
