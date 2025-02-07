@@ -3,23 +3,6 @@
 ## Description
 `nextjs-langchain-bot` is a Retrieval-Augmented Generation (RAG) chatbot built using **JavaScript**, **LangChain.js**, **Next.js**, and **OpenAI**. It retrieves relevant data from a knowledge base and combines it with OpenAI's natural language processing to deliver intelligent, context-aware responses.
 
----
-
-## Table of Contents
-1. [Features](#features)  
-2. [Tech Stack](#tech-stack)  
-3. [Getting Started](#getting-started)  
-    - [Prerequisites](#prerequisites)  
-    - [Installation](#installation)  
-4. [Usage](#usage)  
-5. [Folder Structure](#folder-structure)  
-6. [Roadmap](#roadmap)  
-7. [Contributing](#contributing)  
-8. [License](#license)  
-9. [Acknowledgments](#acknowledgments)
-
----
-
 ## Features
 - **Contextual Chatbot**: Provides precise and meaningful responses by retrieving relevant information.  
 - **Retrieval-Augmented Generation**: Integrates external data retrieval with advanced language models.  
